@@ -1,0 +1,36 @@
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 20px;
+  background: linear-gradient(120deg, #1e1e3f, #2b2b5a);
+  color: #f0f0f0;
+}
+
+button {
+  background-color: #5b7fff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #7a91ff;
+}
+
+.controls {
+  margin-bottom: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tab-button.active {
+  background-color: #8f5be7;
+}
+
+table {
+  background: white;
+  color: black;
+}

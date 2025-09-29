@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certible Tabs GUI</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { font-family: sans-serif; }
+    .tabs { display: flex; flex-wrap: wrap; margin-bottom: 10px; }
+    .tab-button {
+      margin: 2px;
+      padding: 6px 12px;
+      border: none;
+      background: #eee;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .tab-button.active {
+      background-color: #4285f4;
+      color: white;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+    th { background: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <h1>Certible - Tabbed View</h1>
+  <div class="tabs" id="tabButtons"></div>
+  <div id="tabContents"></div>
+
+  <script>
+    const jsonUrl = "certible_export.json"; // Pad naar je JSON-bestand
+
+    async function loadCertificates() {
+      const response = await fetch(jsonUrl);
+      const data = await response.json();
+
+      const byRubric = {};
+      data.forEach(cert => {
+        const rubric = cert.rubric || "Other";
+        if (!byRubric[rubric]) byRubric[rubric] = [];
+        byRubric[rubric].push(cert);
+      });
+
+      const tabButtons = document.getElementById("tabButtons");
+      const tabContents = document.getElementById("tabContents");
+
+      Object.keys(byRubric).forEach((rubric, index) => {
+        const button = document.createElement("button");
+        button.textContent = rubric;
+        button.className = "tab-button" + (index === 0 ? " active" : "");
+        button.onclick = () => setActiveTab(rubric);
+        tabButtons.appendChild(button);
+
+        const content = document.createElement("div");
+        content.id = `tab-${rubric}`;
+        content.className = "tab-content" + (index === 0 ? " active" : "");
+
+        const table = document.createElement("table");
+        const thead = document.createElement("thead");
+        const tbody = document.createElement("tbody");
+
+        const sample = byRubric[rubric][0];
+        const fields = Object.keys(sample);
+
+        const headRow = document.createElement("tr");
+        fields.forEach(f => {
+          const th = document.createElement("th");
+          th.textContent = f;
+          headRow.appendChild(th);
+        });
+        thead.appendChild(headRow);
+
+        byRubric[rubric].forEach(cert => {
+          const row = document.createElement("tr");
+          fields.forEach(f => {
+            const td = document.createElement("td");
+            td.textContent = cert[f] || "";
+            row.appendChild(td);
+          });
+          tbody.appendChild(row);
+        });
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+        content.appendChild(table);
+        tabContents.appendChild(content);
+      });
+    }
+
+    function setActiveTab(rubric) {
+      document.querySelectorAll(".tab-button").forEach(btn => {
+        btn.classList.toggle("active", btn.textContent === rubric);
+      });
+      document.querySelectorAll(".tab-content").forEach(div => {
+        div.classList.toggle("active", div.id === `tab-${rubric}`);
+      });
+    }
+
+    loadCertificates();
+  </script>
+</body>
+</html>

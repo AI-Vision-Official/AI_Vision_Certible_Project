@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certible GUI v2</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>🎓 Certible - Certificate Manager</h1>
+<header><center>
+  <p>🎖️ Guiness Certificate Count: <span id="cert-count">0</span></p>
+</center></header>
+  <div id="form-area">
+    <h3>Add Certificate</h3>
+<form id="certForm">
+<label>
+  Certificate Name
+  <input type="text" id="Certificate Name" />
+</label>
+
+<label>
+  School / Issuer
+  <input type="text" id="School / Issuer" />
+</label>
+
+<label>
+  Subject
+  <input type="text" id="Subject" />
+</label>
+
+<label>
+  Part of Series
+  <select id="Part of Series">
+    <option value="">-- Yes / No --</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+</label>
+
+<label>
+  Diploma Number
+  <input type="text" id="Diploma Number" />
+</label>
+
+<label>
+  Date Credential
+  <input type="date" id="Date Credential" />
+</label>
+
+<label>
+  Level
+  <input type="text" id="Level" />
+</label>
+
+<label>
+  Language
+  <select id="Language">
+    <option value="">-- Choose Language --</option>
+    <option value="English">English</option>
+    <option value="Dutch">Dutch</option>
+    <option value="French">French</option>
+    <option value="German">German</option>
+    <option value="Spanish">Spanish</option>
+    <option value="Other">Other</option>
+  </select>
+</label>
+
+<label>
+  Location
+  <input type="text" id="Location" />
+</label>
+
+<label>
+  Certification Type
+  <input type="text" id="Certification Type" />
+</label>
+
+<label>
+  Accredited?
+  <select id="Accredited?">
+    <option value="">-- Yes / No --</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+</label>
+
+<label>
+  Accreditation Institute
+  <input type="text" id="Accreditation Institute" />
+</label>
+
+<label>
+  Valid Until
+  <input type="date" id="Valid Until" />
+</label>
+
+<label>
+  Renewed?
+  <select id="Renewed?">
+    <option value="">-- Yes / No --</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+</label>
+
+<label>
+  Status
+  <select id="Status">
+    <option value="">-- Choose Status --</option>
+    <option value="Active">Active</option>
+    <option value="Expired">Expired</option>
+    <option value="Suspended">Suspended</option>
+    <option value="Archived">Archived</option>
+  </select>
+</label>
+
+<label>
+  Renewed On
+  <input type="date" id="Renewed On" />
+</label>
+
+<label>
+  Badge
+<select id="Badge">
+    <option value="">-- Yes / No --</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+</label>
+
+<label>
+  Badge Platform
+  <input type="text" id="Badge Platform" />
+</label>
+
+<label>
+  Remarks
+  <input type="text" id="Remarks" />
+</label>
+
+  
+  <button type="submit" class="btn">Add Certificate</button>
+</form>
+  </div>
+
+  <div class="controls">
+    <button onclick="toggleMiniView()">🔍 Mini View</button>
+    <button onclick="toggleColumnPicker()">🧩 Column Picker</button>
+    <button onclick="exportCurrentTab('csv')">💾 Export CSV</button>
+    <button onclick="exportCurrentTab('json')">💾 Export JSON</button>
+    <button onclick="exportCurrentTab('xlsx')">💾 Export XLSX</button>
+    <div id="column-picker" class="column-picker"></div>
+  </div>
+
+  <div class="tab-container" id="tab-buttons"></div>
+  <div id="tab-content"></div>
+
+<footer>
+  <p>🎖️ Certificate Count: <span id="cert-count">0</span></p>
+</footer>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/xlsx.mini.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 20px;
+  background: linear-gradient(120deg, #1e1e3f, #2b2b5a);
+  color: #f0f0f0;
+}
+button {
+  background-color: #5b7fff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #7a91ff;
+}
+.controls {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tab-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.tab-button {
+  padding: 8px 12px;
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.tab-button.active {
+  background: #4285f4;
+  color: white;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  position: relative;
+}
+
+th {
+  cursor: pointer;
+  background: #e9e9e9;
+  user-select: none;
+}
+
+input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px;
+}
+
+.search-box {
+  margin-bottom: 10px;
+  padding: 4px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.column-picker {
+  display: none;
+  background: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.resizable {
+  resize: horizontal;
+  overflow: auto;
+  min-width: 80px;
+  max-width: 500px;
+}
+
+.small-tab {
+  font-size: 0.85em;
+  background: #eee;
+  margin: 2px;
+}
+
+.mini td:not(:first-child),
+.mini th:not(:first-child) {
+  display: none;
+}

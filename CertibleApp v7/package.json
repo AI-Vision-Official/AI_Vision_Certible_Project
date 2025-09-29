@@ -1,0 +1,14 @@
+{
+  "name": "certible-app",
+  "version": "7.0.0",
+  "description": "Electron GUI for managing certificate JSON data.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Brigitte",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^27.0.0"
+  }
+}

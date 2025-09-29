@@ -1,0 +1,120 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certible GUI</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; }
+    th { background-color: #f0f0f0; }
+    input, select { margin: 5px; padding: 4px; }
+    .btn { margin: 10px 0; padding: 8px 12px; }
+  </style>
+</head>
+<body>
+  <h1>Certible - Certificate Manager</h1>
+
+  <div id="form-area">
+    <h3>Add Certificate (only in-memory now)</h3>
+    <form id="certForm">
+      <input type="text" placeholder="Certificate Name" id="certificate_name" required>
+      <input type="text" placeholder="School / Issuer" id="school_issuer">
+      <input type="text" placeholder="Subject" id="subject">
+      <input type="text" placeholder="Part of Series" id="part_of_series">
+      <input type="text" placeholder="Diploma Number" id="diploma_number">
+      <input type="date" id="date_credential" placeholder="Date Credential" title="Date Credential">
+      <input type="text" placeholder="Level" id="level">
+      <input type="text" placeholder="Language" id="language">
+      <input type="text" placeholder="Location" id="location">
+      <input type="text" placeholder="Certification Type" id="certification_type">
+      <label for="accredited">Accredited?</label>
+      <select id="accredited" title="Accredited">
+        <option value="">Select...</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+      <input type="text" placeholder="Accreditation Institute" id="accreditation_institute">
+      <label for="valid_until">Valid Until</label>
+      <input type="date" id="valid_until" placeholder="Valid Until" title="Valid Until">
+      <label for="renewed">Renewed?</label>
+      <select id="renewed" title="Renewed">
+        <option value="">Select...</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+      <input type="text" placeholder="Status" id="status">
+      <label for="renewed_on">Renewed On</label>
+      <input type="date" id="renewed_on" placeholder="Renewed On" title="Renewed On">
+      <input type="text" placeholder="Badge" id="badge">
+      <input type="text" placeholder="Badge Platform" id="badge_platform">
+      <input type="text" placeholder="Remarks" id="remarks">
+      <button type="submit" class="btn">Add Certificate</button>
+    </form>
+  </div>
+
+  <h2>Loaded Certificates</h2>
+  <table id="data-table">
+    <thead>
+      <tr id="tableHead"></tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <script>
+    const fields = [
+      "certificate_name", "school_issuer", "subject", "part_of_series", "diploma_number",
+      "date_credential", "level", "language", "location", "certification_type",
+      "accredited", "accreditation_institute", "valid_until", "renewed", "status",
+      "renewed_on", "badge", "badge_platform", "remarks"
+    ];
+
+    const tableHead = document.getElementById("tableHead");
+    const tableBody = document.getElementById("tableBody");
+    const certForm = document.getElementById("certForm");
+
+    // Vul de kolomnamen in
+    fields.forEach(f => {
+      const th = document.createElement("th");
+      th.textContent = f.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+      tableHead.appendChild(th);
+    });
+
+    // Voeg 1 rij toe aan tabel
+    function addRowToTable(entry) {
+      const tr = document.createElement("tr");
+      fields.forEach(f => {
+        const td = document.createElement("td");
+        td.textContent = entry[f] || "";
+        tr.appendChild(td);
+      });
+      tableBody.appendChild(tr);
+    }
+
+    // Formulierverzending
+    certForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const newEntry = {};
+      fields.forEach(f => {
+        const el = document.getElementById(f);
+        newEntry[f] = el.value;
+      });
+      addRowToTable(newEntry);
+      certForm.reset();
+    });
+
+    // JSON inladen (alleen lezen vanaf lokale server of Electron)
+    async function loadData() {
+      try {
+        const response = await fetch("certible_export.json");
+        const data = await response.json();
+        data.forEach(entry => addRowToTable(entry));
+      } catch (err) {
+        console.warn("Kon JSON niet laden:", err);
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

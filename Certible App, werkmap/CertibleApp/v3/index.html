@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certible GUI</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <h1>Certible - Certificate Manager</h1>
+    <div id="form-area">
+        <h3>Add Certificate</h3>
+        <form id="certForm">
+            <input type="text" placeholder="Certificate Name" id="Certificate Name" required>
+            <input type="text" placeholder="School / Issuer" id="School / Issuer">
+            <input type="text" placeholder="Subject" id="Subject">
+            <input type="text" placeholder="Part of Series" id="Part of Series">
+            <input type="text" placeholder="Diploma Number" id="Diploma Number">
+            <input type="date" placeholder="Date Credential" id="Date Credential">
+            <label for="Renewed?" class="visually-hidden">Renewed?</label>
+            <input type="text" placeholder="Language" id="Language">
+            <input type="text" placeholder="Location" id="Location">
+            <input type="text" placeholder="Certification Type" id="Certification Type">
+            <label for="Accredited?" class="visually-hidden">Accredited?</label>
+            <select id="Accredited?"><option value="">Accredited?</option><option value="Yes">Yes</option><option value="No">No</option></select>
+            <input type="text" placeholder="Accreditation Institute" id="Accreditation Institute">
+            <input type="date" placeholder="Valid Until" id="Valid Until">
+            <label for="Renewed?" class="visually-hidden">Renewed?</label>
+            <select id="Renewed?"><option value="">Renewed?</option><option value="Yes">Yes</option><option value="No">No</option></select>
+            <input type="text" placeholder="Status" id="Status">
+            <input type="date" placeholder="Renewed On" id="Renewed On">
+            <input type="text" placeholder="Badge" id="Badge">
+            <input type="text" placeholder="Badge Platform" id="Badge Platform">
+            <input type="text" placeholder="Remarks" id="Remarks">
+            <button type="submit" class="btn">Add Certificate</button>
+        </form>
+    </div>
+  <div class="controls">
+    <button onclick="toggleMiniView()">🔍 Miniweergave</button>
+    <button onclick="toggleColumnPicker()">🧩 Kolommen kiezen</button>
+    <button onclick="exportCurrentTab('csv')">💾 Export CSV</button>
+    <button onclick="exportCurrentTab('json')">💾 Export JSON</button>
+    <button onclick="exportCurrentTab('xlsx')">💾 Export XLSX</button>
+    <button onclick="exportCurrentTab('pdf')">💾 Export PDF</button>
+    <div id="column-picker" class="column-picker"></div>
+</div>
+
+    <script>
+        const fields = [
+            "Certificate Name", "School / Issuer", "Subject", "Part of Series", "Diploma Number",
+            "Date Credential", "Level", "Language", "Location", "Certification Type",
+            "Accredited?", "Accreditation Institute", "Valid Until", "Renewed?", "Status",
+            "Renewed On", "Badge", "Badge Platform", "Remarks"
+        ];
+
+        const tableHead = document.getElementById("tableHead");
+        const tableBody = document.getElementById("tableBody");
+        const certForm = document.getElementById("certForm");
+
+        fields.forEach(f => {
+            let th = document.createElement("th");
+            th.textContent = f;
+            tableHead.appendChild(th);
+        });
+
+        certForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const newEntry = {};
+            fields.forEach(f => {
+                newEntry[f] = document.getElementById(f).value;
+            });
+            fetch("certible_export.json")
+                .then(resp => resp.json())
+                .catch(() => [])
+                .then(data => {
+                    data.push(newEntry);
+                    return fetch("certible_data.json", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(data, null, 4)
+                    });
+                }).then(() => {
+                    certForm.reset();
+                    loadData();
+                });
+        });
+
+        loadData();
+    </script>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #1e1e3f;
+  color: #f0f0f0;
+  margin: 0;
+  padding: 20px;
+}
+h1 {
+  text-align: center;
+  color: #b48efc;
+}
+.controls, .tab-container, #form-area {
+  margin-top: 20px;
+}
+/* Formulier lay-out */
+#form-area {
+  background: #2b2b4d;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 30px;
+  box-shadow: 0 0 15px #6a5acd55;
+}
+
+#form-area h3 {
+  color: #b48efc;
+  margin-bottom: 15px;
+}
+
+form#certForm {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px 20px;
+}
+
+form#certForm label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+form#certForm input[type="text"],
+form#certForm input[type="date"],
+form#certForm select {
+  padding: 6px 10px;
+  background: #1e1e3f;
+  border: 1px solid #555;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+form#certForm input[type="text"]::placeholder {
+  color: #aaa;
+}
+/* Formulier: meer kolommen op grotere schermen */
+#form-area form {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px 20px;
+  background: #2a2a4d;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* Labels in het formulier netjes onder elkaar */
+#form-area form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+/* Submit knop stijl */
+#certForm button[type="submit"] {
+  grid-column: 1 / -1; /* Knop neemt hele breedte */
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(45deg, #6a5acd, #b48efc);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 10px rgba(106, 90, 205, 0.5);
+  margin-top: 10px;
+}
+
+#certForm button[type="submit"]:hover {
+  background: linear-gradient(45deg, #b48efc, #6a5acd);
+  box-shadow: 0 6px 14px rgba(180, 142, 252, 0.8);
+}
+
+.tab-button {
+  background: #4b0082;
+  color: #fff;
+  padding: 10px;
+  margin: 2px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.tab-button.active {
+  background: #6a5acd;
+}
+.search-box {
+  background: linear-gradient(45deg, #6a5acd, #b48efc);
+  color: #fff;
+  padding: 8px;
+  margin: 10px 0;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th.resizable {
+  position: relative;
+}
+
+th.resizable div {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 10;
+}
+th, td {
+  border: 1px solid #444;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background: #3a3a6a;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  background: #2c2c4a;
+  color: #fff;
+  border: none;
+}
+.column-picker {
+  background: #2b2b4d;
+  padding: 10px;
+  display: none;
+}
+footer {
+  text-align: center;
+  color: #aaa;
+  margin-top: 30px;
+}
+td[style*="display: none"], 
+th[style*="display: none"] {
+  display: none !important;
+}

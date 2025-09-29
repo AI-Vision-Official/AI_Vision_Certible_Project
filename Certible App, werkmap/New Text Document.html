@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Certible GUI</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="controls">
+    <button onclick="toggleMiniView()">🔍 Miniweergave</button>
+    <button onclick="toggleColumnPicker()">🧩 Kolommen kiezen</button>
+    <button onclick="exportCurrentTab('csv')">💾 Export CSV</button>
+    <button onclick="exportCurrentTab('json')">💾 Export JSON</button>
+    <div id="column-picker" class="column-picker"></div>
+  </div>
+
+  <div class="tab-container" id="tab-buttons"></div>
+  <div id="tab-content"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

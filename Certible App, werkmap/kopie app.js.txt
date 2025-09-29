@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certible GUI v2</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>🎓 Certible - Certificate Manager</h1>
+  <div id="form-area">
+    <h3>Add Certificate</h3>
+<form id="certForm">
+  <input type="text" id="Certificate Name" placeholder="Certificate Name" required />
+  <input type="text" id="School / Issuer" placeholder="School / Issuer" />
+  <input type="text" id="Subject" placeholder="Subject" />
+  <input type="text" id="Part of Series" placeholder="Part of Series" />
+  <input type="text" id="Diploma Number" placeholder="Diploma Number" />
+  <input type="date" id="Date Credential" placeholder="Date Credential" />
+  <input type="text" id="Level" placeholder="Level" />
+  <input type="text" id="Language" placeholder="Language" />
+  <input type="text" id="Location" placeholder="Location" />
+  <input type="text" id="Certification Type" placeholder="Certification Type" />
+  
+  <label for="Accredited?"></label>
+  <select id="Accredited?">
+    <option value="">Accredited?</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+  
+  <input type="text" id="Accreditation Institute" placeholder="Accreditation Institute" />
+  <input type="date" id="Valid Until" placeholder="Valid Until" />
+  
+  <label for="Renewed?">Renewed?</label>
+  <select id="Renewed?">
+    <option value="">Select...</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+  
+  <input type="text" id="Status" placeholder="Status" />
+  <input type="date" id="Renewed On" placeholder="Renewed On" />
+  <input type="text" id="Badge" placeholder="Badge" />
+  <input type="text" id="Badge Platform" placeholder="Badge Platform" />
+  <input type="text" id="Remarks" placeholder="Remarks" />
+  
+  <button type="submit" class="btn">Add Certificate</button>
+</form>
+  </div>
+
+  <div class="controls">
+    <button onclick="toggleMiniView()">🔍 Miniweergave</button>
+    <button onclick="toggleColumnPicker()">🧩 Kolommen kiezen</button>
+    <button onclick="exportCurrentTab('csv')">💾 Export CSV</button>
+    <button onclick="exportCurrentTab('json')">💾 Export JSON</button>
+    <button onclick="exportCurrentTab('xlsx')">💾 Export XLSX</button>
+    <div id="column-picker" class="column-picker"></div>
+  </div>
+
+  <div class="tab-container" id="tab-buttons"></div>
+  <div id="tab-content"></div>
+
+<footer>
+  <p>🎖️ Certificate Count: <span id="cert-count">0</span></p>
+</footer>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/xlsx.mini.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
